@@ -68,7 +68,7 @@ const Navbar = () => {
 								</Link>
 								<Link
 									to={"/signup"}
-									className='bg-cartiva-text hover:bg-cartiva-accent text-white py-2 px-4 rounded text-xs uppercase tracking-widest font-bold transition duration-300 ease-in-out flex items-center'
+									className='bg-black hover:bg-cartiva-gray text-white py-2 px-4 rounded text-xs uppercase tracking-widest font-bold transition duration-300 ease-in-out flex items-center'
 								>
 									<UserPlus className='mr-1 hidden sm:inline' size={16} strokeWidth={2.5} />
 									Sign Up
