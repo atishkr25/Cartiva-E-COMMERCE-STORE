@@ -86,8 +86,12 @@ export const logout = async (req, res) => {
     try{
         const refreshToken = req.cookies.refreshToken;
         if(refreshToken){
-            const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
-            await redis.del(`refreshToken:${decoded.userId}`);
+            try {
+                const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+                await redis.del(`refreshToken:${decoded.userId}`);
+            } catch (jwtError) {
+                console.log("Invalid or expired refresh token during logout", jwtError.message);
+            }
         }
         res.clearCookie('accessToken');
         res.clearCookie('refreshToken');
