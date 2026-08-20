@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
 import SignUpPage from "./pages/SignUpPage";
@@ -17,6 +17,16 @@ import { useCartStore } from "./stores/useCartStore";
 import PurchaseSuccessPage from "./pages/PurchaseSuccessPage";
 import PurchaseCancelPage from "./pages/PurchaseCancelPage";
 
+const ScrollToTop = () => {
+	const { pathname } = useLocation();
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [pathname]);
+
+	return null;
+};
+
 function App() {
 	const { user, checkAuth, checkingAuth } = useUserStore();
 	const { getCartItems } = useCartStore();
@@ -34,6 +44,7 @@ function App() {
 
 	return (
 		<div className='min-h-screen bg-cartiva-bg text-cartiva-text relative overflow-hidden flex flex-col font-sans'>
+			<ScrollToTop />
 			<div className='relative z-50 pt-16 flex-grow'>
 				<Navbar />
 				<Routes>

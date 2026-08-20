@@ -17,27 +17,33 @@ const ProductCard = ({ product }) => {
 	};
 
 	return (
-		<div className='flex w-full relative flex-col overflow-hidden rounded-lg border border-gray-700 shadow-lg'>
-			<div className='relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl'>
-				<img className='object-cover w-full' src={product.image} alt='product image' />
-				<div className='absolute inset-0 bg-black bg-opacity-20' />
+		<div className='group flex w-full relative flex-col overflow-hidden bg-cartiva-bg'>
+			<div className='relative w-full aspect-[4/5] overflow-hidden bg-gray-100'>
+				<img 
+					className='object-cover w-full h-full transition-transform duration-[1.5s] ease-out group-hover:scale-105' 
+					src={product.image} 
+					alt={product.name} 
+					loading="lazy"
+				/>
+				<div className='absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500' />
+				
+				{/* Minimal Add to Cart button overlay */}
+				<div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-10">
+					<button
+						className='w-full flex items-center justify-center bg-cartiva-text text-white py-3 text-[10px] uppercase tracking-widest font-bold hover:bg-black transition-colors duration-300 shadow-md'
+						onClick={handleAddToCart}
+					>
+						<ShoppingCart size={16} className='mr-2' strokeWidth={2} />
+						Add to cart
+					</button>
+				</div>
 			</div>
 
-			<div className='mt-4 px-5 pb-5'>
-				<h5 className='text-xl font-semibold tracking-tight text-white'>{product.name}</h5>
-				<div className='mt-2 mb-5 flex items-center justify-between'>
-					<p>
-						<span className='text-3xl font-bold text-emerald-400'>${product.price}</span>
-					</p>
-				</div>
-				<button
-					className='flex items-center justify-center rounded-lg bg-emerald-600 px-5 py-2.5 text-center text-sm font-medium
-					 text-white hover:bg-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-300'
-					onClick={handleAddToCart}
-				>
-					<ShoppingCart size={22} className='mr-2' />
-					Add to cart
-				</button>
+			<div className='pt-4 pb-2 px-1 flex flex-col items-center text-center'>
+				<h5 className='text-sm font-bold tracking-tight text-cartiva-text uppercase mb-1'>{product.name}</h5>
+				<p className='text-sm text-cartiva-gray font-medium'>
+					${product.price}
+				</p>
 			</div>
 		</div>
 	);
